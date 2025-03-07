@@ -21,6 +21,20 @@ export default function Home() {
           </Button>
         </div>
       </nav>
+      <main className="flex flex-col justify-center w-full py-20 bg-gradient-to-t from-secondary to-75% md:py-30 lg:py-40">
+        <h1 className="flex flex-row justify-center px-3 mb-4 text-3xl font-bold text-center leading-relaxed md:mb-4 md:text-5xl md:px-6 lg:mb-6 lg:text-6xl lg:px-16">
+          Open&nbsp;
+          <span className="pb-1 block bg-gradient-to-r from-zinc-300 via-zinc-500 to-zinc-700 text-transparent bg-clip-text">
+            Physics
+          </span>
+        </h1>
+        <p className="self-center max-w-xl px-4 mb-4 font-medium text-center text-primary md:max-w-2xl md:text-lg lg:text-xl">
+          An Open-Source Physics Learning Platform, Enhanced by AI for Personalized, In-Depth Education—Completely Free.
+          Open Physics makes university-level physics accessible to everyone, offering AI-powered tutoring on specific topics 
+          for real-time, personalized feedback. Track your progress throughout the course and master physics at your own 
+          pace—all at no cost.
+        </p>
+      </main>
     </div>
   );
 }
