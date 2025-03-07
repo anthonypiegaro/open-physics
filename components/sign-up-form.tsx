@@ -5,7 +5,7 @@ import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Lottie, { LottieRefCurrentProps } from "lottie-react"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { setErrorMap, z } from "zod"
 
 import { cn } from "@/lib/utils"
 import { signUpFormSchema } from "@/lib/schemas/signUpFormSchema"
@@ -28,6 +28,7 @@ export function SignUpForm({
   ...props
 }: React.ComponentProps<"form">) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null);
 
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
@@ -45,7 +46,9 @@ export function SignUpForm({
 
     await registerUser(values)
       .then((data) => {
-
+        if (data.error) {
+          setError(data.error)
+        }
       })
       .catch((error) => {
         console.log("An error occured:", error.message)
@@ -91,6 +94,7 @@ export function SignUpForm({
               </FormItem>
             )}
           />
+          {error && <p className="text-destructive">{error}</p>}
           <Button className="w-full" onClick={form.handleSubmit(onSubmit)} disabled={isSubmitting}>
             Sign Up
             <Lottie 
