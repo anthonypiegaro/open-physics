@@ -29,7 +29,7 @@ export default function Home() {
           </span>
         </h1>
         <p className="self-center max-w-xl px-4 mb-4 font-medium text-center text-primary md:max-w-2xl md:text-lg lg:text-xl">
-          An Open-Source Physics Learning Platform, Enhanced by AI for Personalized, In-Depth Education—Completely Free.
+          An open-source physics learning platform, enhanced by AI for personalized, in-depth education—completely free.
           Open Physics makes university-level physics accessible to everyone, offering AI-powered tutoring on specific topics 
           for real-time, personalized feedback. Track your progress throughout the course and master physics at your own 
           pace—all at no cost.
