@@ -1,7 +1,8 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import Lottie, { LottieRefCurrentProps } from "lottie-react"
+import { LottieRefCurrentProps } from "lottie-react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useRef, useState } from "react"
@@ -23,6 +24,8 @@ import {
 import { Input } from "@/components/ui/input"
 
 import shapeAnimation from "@/public/lottie/shape-animation.json"
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 export function SignInForm({
   className,

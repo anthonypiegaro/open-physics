@@ -1,10 +1,11 @@
 "use client"
 
 import { useRef, useState } from "react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import Lottie, { LottieRefCurrentProps } from "lottie-react"
+import { LottieRefCurrentProps } from "lottie-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -23,6 +24,8 @@ import {
 import { Input } from "@/components/ui/input"
 
 import shapeAnimation from "@/public/lottie/shape-animation.json"
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 export function SignUpForm({
   className,
