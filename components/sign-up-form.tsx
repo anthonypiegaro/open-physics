@@ -2,11 +2,13 @@
 
 import { useRef, useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Lottie, { LottieRefCurrentProps } from "lottie-react"
 import { useForm } from "react-hook-form"
-import { setErrorMap, z } from "zod"
+import { z } from "zod"
 
+import { authClient } from "@/lib/auth-client"
 import { cn } from "@/lib/utils"
 import { signUpFormSchema } from "@/lib/schemas/signUpFormSchema"
 import { Button } from "@/components/ui/button"
@@ -20,7 +22,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-import { registerUser } from "@/app/sign-up/actions"
 import shapeAnimation from "@/public/lottie/shape-animation.json"
 
 export function SignUpForm({
@@ -28,7 +29,9 @@ export function SignUpForm({
   ...props
 }: React.ComponentProps<"form">) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>("")
+
+  const router = useRouter()
 
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
@@ -41,22 +44,49 @@ export function SignUpForm({
   })
 
   const onSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
-    setIsSubmitting(true)
-    lottieRef.current?.play()
-
-    await registerUser(values)
-      .then((data) => {
-        if (data.error) {
-          setError(data.error)
+    try {
+      await authClient.signUp.email({
+        email: values.email,
+        password: values.password,
+        name: values.email,
+      }, {
+        onRequest: (ctx) => {
+          setIsSubmitting(true)
+          lottieRef.current?.play()
+        },
+        onSuccess: (ctx) => {
+          router.push("/dashboard")
+        },
+        onError: (ctx) => {
+          lottieRef.current?.goToAndStop(0)
+          setIsSubmitting(false)
+          setError(ctx.error.message)
         }
       })
-      .catch((error) => {
-        console.log("An error occured:", error.message)
-      })
-
-    setIsSubmitting(false)
-    lottieRef.current?.goToAndStop(0)
+    } catch (error) {
+      console.error(error)
+      setError("Something went wrong")
+    }
   }
+
+  // DELETE this func
+  // const onSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
+  //   setIsSubmitting(true)
+  //   lottieRef.current?.play()
+
+  //   await registerUser(values)
+  //     .then((data) => {
+  //       if (data.error) {
+  //         setError(data.error)
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log("An error occured:", error.message)
+  //     })
+
+  //   setIsSubmitting(false)
+  //   lottieRef.current?.goToAndStop(0)
+  // }
 
   return (
     <Form {...form}>
