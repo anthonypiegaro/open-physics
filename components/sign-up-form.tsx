@@ -69,25 +69,6 @@ export function SignUpForm({
     }
   }
 
-  // DELETE this func
-  // const onSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
-  //   setIsSubmitting(true)
-  //   lottieRef.current?.play()
-
-  //   await registerUser(values)
-  //     .then((data) => {
-  //       if (data.error) {
-  //         setError(data.error)
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log("An error occured:", error.message)
-  //     })
-
-  //   setIsSubmitting(false)
-  //   lottieRef.current?.goToAndStop(0)
-  // }
-
   return (
     <Form {...form}>
       <form className={cn("flex flex-col gap-6", className)} {...props}>
