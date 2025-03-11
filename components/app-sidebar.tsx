@@ -14,6 +14,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from "@/components/ui/sidebar"
+import AppSidebarSignout from "./app-sidebar-sign-out"
 
 export default function AppSidebar() {
   return (
@@ -22,25 +23,23 @@ export default function AppSidebar() {
       <SidebarFooter>
           <SidebarMenu>
           <SidebarMenuItem>
-              <DropdownMenu>
+            <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                  <SidebarMenuButton>
-                  <User2 /> Username
-                  <ChevronUp className="ml-auto" />
-                  </SidebarMenuButton>
+                <SidebarMenuButton>
+                <User2 /> Username
+                <ChevronUp className="ml-auto" />
+                </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent
                   side="top"
                   className="w-[--radix-popper-anchor-width]"
               >
-                  <DropdownMenuItem>
-                    <span>Account</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <span>Sign out</span>
-                  </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <span>Account</span>
+                </DropdownMenuItem>
+                <AppSidebarSignout />
               </DropdownMenuContent>
-              </DropdownMenu>
+            </DropdownMenu>
           </SidebarMenuItem>
           </SidebarMenu>
       </SidebarFooter>
